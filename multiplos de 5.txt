@@ -1,0 +1,98 @@
+
+
+/* Program to insert in a sorted list */
+
+#include<stdio.h>
+#include<stdlib.h>
+ 
+//http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/
+/* Link list node */
+struct node
+{
+    int data;
+    struct node* next;
+};
+ 
+/* function to insert a new_node in a list. Note that this
+  function expects a pointer to head_ref as this can modify the
+  head of the input linked list (similar to push())*/
+void sortedInsert(struct node** head_ref, struct node* new_node)
+{
+    struct node* current;
+    /* Special case for the head end */
+    if (*head_ref == NULL || (*head_ref)->data <= new_node->data)
+    {
+        new_node->next = *head_ref;
+        *head_ref = new_node;
+    }
+    else
+    {
+        /* Locate the node before the point of insertion */
+        current = *head_ref;
+        while (current->next!=NULL &&
+               current->next->data > new_node->data)
+        {
+            current = current->next;
+        }
+        new_node->next = current->next;
+        current->next = new_node;
+    }
+}
+ 
+/* BELOW FUNCTIONS ARE JUST UTILITY TO TEST sortedInsert */
+ 
+/* A utility function to create a new node */
+struct node *newNode(int new_data)
+{
+    /* allocate node */
+    struct node* new_node =
+        (struct node*) malloc(sizeof(struct node));
+ 
+    /* put in the data  */
+    new_node->data  = new_data;
+    new_node->next =  NULL;
+ 
+    return new_node;
+}
+ 
+/* Function to print linked list */
+void printList(struct node *head)
+{
+    struct node *temp = head;
+    while(temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}
+ 
+/* Drier program to test count function*/
+int main()
+{
+    /* Start with the empty list */
+    struct node* head = NULL;
+    int N;
+    scanf("%d", &N);
+    
+    for(int i = 0; i < N; i++) {
+    	int elem;
+    	scanf("%d", &elem);
+    	if(elem % 5 == 0) {
+    		struct node *nuevo = newNode(elem);
+    		sortedInsert(&head, nuevo);
+    	}
+    }
+    /*
+    int arr[] = {1, 5, 55, 900,57,43,22,44,50,66,895,54,53,44,5, 7 };
+    int N = sizeof(arr)/sizeof(int);
+    for(int i =0; i < N; i++) {
+    	 if(arr[i] % 5 == 0) {
+    	 	struct node *nuevo = newNode(arr[i]);
+    	 	sortedInsert(&head, nuevo);
+    	 }
+    }
+    */
+    printList(head);
+
+    return 0;
+}
