@@ -1,0 +1,49 @@
+﻿https://omegaup.com/arena/problem/DFSDCECII/#problems/DFSDCECII
+
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int main() {
+
+    int n;
+    scanf("%d", &n);
+
+    int contFilasImpares = 0;
+    for (int i = 0; i < n; i++)
+    {
+       
+       
+        bool todosImpares = true;
+        for (int j = 0; j < n; j++)
+        {
+        	int elem;
+        	scanf("%d", &elem);
+        	
+            if ( elem % 2 == 0)
+            {
+                todosImpares = false;
+                //break;
+            }
+        }
+        if (todosImpares)
+        {
+            contFilasImpares++;
+        }
+
+    }
+
+    if (contFilasImpares == 2)
+    {
+        cout <<("SI") <<endl;
+    }
+    else
+    {
+        cout <<("NO") << endl;
+    }
+
+
+	
+	return 0;
+}
