@@ -1,0 +1,62 @@
+
+https://omegaup.com/arena/problem/John-Freddy-y-los-numeros/#problems
+
+#include <iostream>
+#include <stdio.h>
+#include <climits>
+
+
+using namespace std;
+
+int main()
+{
+   
+    std::cin.tie(nullptr);
+    std::ios_base::sync_with_stdio(false);
+
+    int n; // = int.Parse(Console.ReadLine().Trim());
+    scanf("%d", &n);
+    //int[] arr = Array.ConvertAll(Console.ReadLine().Trim().Split(' '), e => int.Parse(e));
+
+    //string[] input = Console.ReadLine().Trim().Split(' ');
+
+    long int primero = INT_MAX;
+    long int segundo = INT_MAX;
+    long int penultimo = 0;
+    long int ultimo = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        long int elem; // = int.Parse(input[i]);
+        //cin >> elem;
+        scanf("%ld", &elem);
+
+        if (elem < primero)
+        {
+            segundo = primero;
+            primero = elem;
+
+        }
+        else if (elem < segundo)
+        {
+            segundo = elem;
+        }
+
+        if (elem > ultimo)
+        {
+            penultimo = ultimo;
+            ultimo = elem;
+        }
+        else if (elem > penultimo)
+        {
+            penultimo = elem;
+        }
+    }
+
+    //Console.WriteLine(Math.Max(primero * segundo, penultimo * ultimo));
+    cout << std::max(primero * segundo, penultimo * ultimo) << endl;
+
+    return 0;
+
+
+}
