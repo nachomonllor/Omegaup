@@ -1,0 +1,102 @@
+
+https://omegaup.com/arena/problem/Frequency-Sort/#problems
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ *
+ * @author usuario
+ */
+public class Main {
+
+   
+     static void sortBasedOnFrequencyAndValue(long[] arr, List<Long> list)
+    {
+        int n = arr.length;
+        final HashMap<Long, Integer> mapCount
+            = new HashMap<Long, Integer>();
+        final HashMap<Long, Integer> mapIndex
+            = new HashMap<Long, Integer>();
+        for (int i = 0; i < n; i++) {
+            if (mapCount.containsKey(arr[i])) {
+                mapCount.put(arr[i],
+                             mapCount.get(arr[i]) + 1);
+            }
+            else {
+                mapCount.put(arr[i],1); // Map to capture Count of elements
+                mapIndex.put(arr[i],i); // Map to capture 1st occurrence of elements
+            }
+        }
+        
+        for(int i =0; i<arr.length; i++) {
+            list.add(arr[i]);
+        }
+ 
+        Collections.sort(list, new Comparator<Long>() {
+            public int compare(Long n1, Long n2)
+            {
+                int freq1 = mapCount.get(n1);
+                int freq2 = mapCount.get(n2);
+                if (freq1 != freq2) {
+                    return freq2 - freq1;
+                }
+                else {
+                    return mapIndex.get(n1)
+                        - mapIndex.get(
+                            n2); // Elements with Lesser
+                                 // Index gets Higher
+                                 // Priority
+                }
+            }
+        });
+       // System.out.println(list);
+       for(Long item : list) {
+           System.out.print(item + " ");
+       }
+    }
+     
+    
+    
+    public static void main(String[] args) throws IOException {
+        // TODO code application logic here
+ 
+        
+        BufferedReader br = new BufferedReader(
+                          new InputStreamReader(System.in));
+        
+        String[] input = br.readLine().trim().split(" ");
+        
+        int N = Integer.parseInt(input[0]);
+        int C = Integer.parseInt(input[1]);
+        
+        String[] arr_string = br.readLine().trim().split(" ");
+        long[] arr = new long[N];
+        for(int i =0; i<arr_string.length; i++) {
+            arr[i] = Integer.parseInt(arr_string[i]);
+        }
+        
+        List<Long> list = new ArrayList<Long>();
+        
+        sortBasedOnFrequencyAndValue( arr,  list);
+        
+        
+     
+        
+    }
+    
+}
