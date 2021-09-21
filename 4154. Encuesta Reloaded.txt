@@ -1,0 +1,75 @@
+
+https://omegaup.com/arena/problem/Encuesta-Reloaded/#problems
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp184
+{
+
+    public class Persona
+    {
+        public int Id;
+        public string Nombre;
+        public double Peso;
+        public double Estatura;
+        public double Imc;
+
+        public Persona(int id, string nombre, double peso, double estatura)
+        {
+            this.Id = id;
+            this.Nombre = nombre;
+            this.Peso = peso;
+            this.Estatura = estatura;
+            this.Imc = this.Peso / (this.Estatura * this.Estatura);
+        }
+
+        //public double IMC()
+        //{
+        //    return (this.Peso / (this.Estatura * this.Estatura));
+        //}
+
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            int n = int.Parse(Console.ReadLine().Trim());
+
+
+            List<Persona> listaPersonas = new List<Persona>();
+
+            while (n-- > 0)
+            {
+                // id, nombre, peso y estatura
+                //string[] input = Console.ReadLine().Trim().Split(' ');
+
+                int id = int.Parse(Console.ReadLine().Trim());
+                string nombre = Console.ReadLine().Trim();
+                double peso = double.Parse(Console.ReadLine().Trim());
+                double estatura = double.Parse(Console.ReadLine().Trim());
+
+                listaPersonas.Add(new Persona(id, nombre, peso, estatura));
+            }
+
+            var result = from item in listaPersonas
+                         orderby item.Imc descending
+                         select item;
+
+
+            foreach(var item in result)
+            {
+                Console.WriteLine(item.Id + " " + item.Nombre + " " + item.Imc.ToString("0.0"));
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
